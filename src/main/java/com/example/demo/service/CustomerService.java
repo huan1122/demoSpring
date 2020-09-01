@@ -10,5 +10,4 @@ public interface CustomerService {
     Customers getDetailCustomer();
     void saveCustomer(TblUsers tblUsers);
     void updateCustomer(TblUsers tblUsers);
-
 }
