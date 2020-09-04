@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "customers")
 public class Customers implements Serializable {
@@ -13,7 +15,7 @@ public class Customers implements Serializable {
     private String phone;
     private String deliveryAddress;
     private Date birthDate;
-
+    private Set<Orders> orders = new HashSet<Orders>(0);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID")
@@ -63,6 +65,15 @@ public class Customers implements Serializable {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @OneToMany(mappedBy = "customers")
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
     }
 
     public Customers(Integer customerId, String customerName, String address, String phone, String deliveryAddress, Date birthDate) {
